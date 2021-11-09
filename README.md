@@ -172,7 +172,7 @@ ping 192.168.56.5
 ![image](https://user-images.githubusercontent.com/93308960/140985284-4ee535f6-9362-4286-8cb4-3f9a3d136318.png)
 
 Yhteys saatiin luotua.
-Tämän jälkeen postuin "sale" koneesta ja otin ssh yhteyden "mastr" koneeseen. Josta testasin yhetyttä "sale" koneeseen 
+Tämän jälkeen postuin "sale" koneesta ```exit``` komennolla ja otin ssh yhteyden "mastr" koneeseen. Josta testasin yhetyttä "sale" koneeseen 
 ```
 sudo vagrant ssh mastr
 &
