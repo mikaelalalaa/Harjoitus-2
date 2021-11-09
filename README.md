@@ -25,30 +25,28 @@ Tehtävät löytyvät [Tero Karvisen sivulta](https://terokarvinen.com/2021/conf
 [Vagrant Revisited](https://terokarvinen.com/2017/04/11/vagrant-revisited-install-boot-new-virtual-machine-in-31-seconds/)
 
 * Vagrantin avulla asentaminen uuden virtuaali koneen.
-* miten luotuun koneeseen voi otta yhteyttä 
-*   
-
-
+* miten luotuun koneeseen voi otta yhteyttä ja käynnistää
 
 
 [Two Machine Virtual Network With Debian 11 Bullseye and Vagrant](https://terokarvinen.com/2021/two-machine-virtual-network-with-debian-11-bullseye-and-vagrant/)
 
-Sivustolla opetetaan miten voi asentaa Vagrantin ja miten voi kirjautua SSH kautta toiselle luodulle koneelle. 
-
-sisältää mm.
+* opetetaan miten voi asentaa Vagrantin ja miten voi kirjautua SSH kautta toiselle luodulle koneelle. 
 * Komentoja
+  * sudo apt-get install vagrant virtualbox
 * Uuden tiedoston luominen
+  * mkdir twohost
 * Poistaa virtuaali koneen
+  * vagrant destroy
 
 [Salt system architecture](https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html)
 
- Sivulla kerrotaan yleisestin mikä on Salt ja sen arkkitehtuurista miten se toimii.
- 
- Sisältää mm
+* Salt ja sen arkkitehtuurista miten se toimii.
 * Miten salt master ja salt minion toimii
+  * se käyttää master-client-mallia, jossa pääkäyttäjä antaa komennot asiakkaalle ja asiakas suorittaa komennon
 * Kerrotaan joitain esimerkki komentoja ja mitä ne tekee.
     * grains 
     * pkg.
+    * salt state
 
 
 
@@ -281,7 +279,10 @@ Poituin masteri koneesta ja kirjauduin ssh yhteydellä orja koneeseen, tarkistam
 Kuvassa näkyy että haluttu käyttäjä "mannytesti" on luotu, näkyy myös että haluttu tree sovellus on asennettu.
 ![image](https://user-images.githubusercontent.com/93308960/141003290-13deb93b-ae5b-4a06-bfef-e3b071bf3233.png)
 
+## lähteet
 
-
-
-
+https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-2021-autumn/#h2-master-slave
+https://terokarvinen.com/2018/salt-quickstart-salt-stack-master-and-slave-on-ubuntu-linux/
+https://terokarvinen.com/2017/04/11/vagrant-revisited-install-boot-new-virtual-machine-in-31-seconds/
+https://terokarvinen.com/2021/two-machine-virtual-network-with-debian-11-bullseye-and-vagrant/
+https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html
