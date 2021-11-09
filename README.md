@@ -78,12 +78,35 @@ Lopuksi testasin että saan orjalta yhteyden, komennoilla.
 sudo salt '*' grains.item
 sudo salt '*' cmd.run 'whoami'
 ```
+![image](https://user-images.githubusercontent.com/93308960/140975770-a082d72c-d6e3-4c94-99b0-23a900753785.png)
 
 
 ## b) Hello Vagrant
 
+Aloitin asennuksen päivittämällä ja sen jälkee asensin itse vagrant.
 
+```
+sudo apt-get update
+&
+sudo apt-get -y install vagrant virtualbox
+```
+Asennuksien jälkeen aloitin asentamaan debianii bullseye vagrantin avulla, komennolla.
+```
+sudo vagrant init debian/bullseye64
+```
+Tämän jälkeen käynnistin koneen komennolla.
+```
+sudo vagrant up
+```
+![image](https://user-images.githubusercontent.com/93308960/140977382-effc9f31-cf6e-4184-8d59-8aa110735189.png)
 
+Kun käynnistys onnistui niin testasin yhetyttä SSH kautta
+```
+sudo vagrant ssh
+```
+![image](https://user-images.githubusercontent.com/93308960/140977749-661d8c22-c786-4165-bf6e-b59aaaaddfd1.png)
+ 
+ joka onnistui.
 
 ## c) Mun verkko
 
