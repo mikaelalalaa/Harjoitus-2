@@ -115,7 +115,78 @@ sudo vagrant ssh
 
 ## c) Mun verkko
 
+Koska aikaisemmassa tehtävässä asennettiin Vagrant jo koneelle, joten aloitin tehtävän luomalla uuden hakemiston nimeltään "twohosts". Luotuun hakemistoon loin uuden tiedoston nimeltään "Vagrantfile"
+```
+ mkdir twohost
+ nano Vagrantfile
+```
+Vasta luotuun tiedostoon lisäsin alla olevan koodin ja tallensin tiedoston.
+```
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+# Copyright 2019-2021 Tero Karvinen http://TeroKarvinen.com
 
+$tscript = <<TSCRIPT
+set -o verbose
+apt-get update
+apt-get -y install tree
+echo "Done - set up test environment - https://terokarvinen.com/search/?q=vagrant"
+TSCRIPT
+
+Vagrant.configure("2") do |config|
+	config.vm.synced_folder ".", "/vagrant", disabled: true
+	config.vm.synced_folder "shared/", "/home/vagrant/shared", create: true
+	config.vm.provision "shell", inline: $tscript
+	config.vm.box = "debian/bullseye64"
+
+	config.vm.define "sale" do |sale|
+		sale.vm.hostname = "sale"
+		sale.vm.network "private_network", ip: "192.168.56.4"
+	end
+
+	config.vm.define "mastr", primary: true do |mastr|
+		mastr.vm.hostname = "mastr"
+		mastr.vm.network "private_network", ip: "192.168.56.5"
+	end
+	
+end
+```
+Lähteet löytyy opettajamme [Tero Karvisen sivulta](https://terokarvinen.com/2021/two-machine-virtual-network-with-debian-11-bullseye-and-vagrant/)
+
+Tämän jälkeen käynnistin koneet komennolla 
+
+```
+sudo vargant up
+```
+![image](https://user-images.githubusercontent.com/93308960/140984686-e6e20e43-c345-43b4-9a72-15e21e689279.png)
+
+Käynnistys oli onnistunut niin otin ensimmäiseksi yhteyden "sale" koneeseen
+```
+sudo vagrant ssh sale
+```
+
+Kun yhetys oli saatu onnistuneestin testasin  yhetyttä toiseen luotuun koneeseen
+```
+ping 192.168.56.5
+```
+![image](https://user-images.githubusercontent.com/93308960/140985284-4ee535f6-9362-4286-8cb4-3f9a3d136318.png)
+
+Yhteys saatiin luotua.
+Tämän jälkeen postuin "sale" koneesta ja otin ssh yhteyden "mastr" koneeseen. Josta testasin yhetyttä "sale" koneeseen 
+```
+sudo vagrant ssh mastr
+&
+ping 192.168.56.4
+```
+![image](https://user-images.githubusercontent.com/93308960/140985677-61e02e15-ae4f-458f-9648-b92bf8f8c320.png)
+
+Sitten testasin yhetyttä internettiin ja pingasin googlea
+```
+ping google.com
+```
+![image](https://user-images.githubusercontent.com/93308960/140985906-aa357d45-6d68-4f5f-996b-c1a1a6fb6f35.png)
+
+joka myös onnistui.
 
 
 ## d) Master-slave
