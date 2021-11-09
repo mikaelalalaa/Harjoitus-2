@@ -191,6 +191,97 @@ joka myös onnistui.
 
 ## d) Master-slave
 
+Tarkoituksena on saada "mastr" kone salt master koneeksi ja "sale" kone salt minion koneeksi.
 
+Minulla oli "mastr" kone auki jonka halusin masteri koneeksi joten asensin salt-masterin. 
+Komento oli  
+```
+sudo apt-get -y install salt-master
+```
+Onnistuneen asennuksen jälkeen poistuin koneelta ```exit``` komennolla ja otin ssh yhteyden "sale" koneeseen
+```
+sudo vagrant ssh sale
+```
+
+Yhteyden luotua asensin "sale" koneeseen salt-minionin. 
+Komento oli 
+```
+sudo apt-get -y install salt-minion
+```
+Asennuksen jälkeen ajoin komennon ```sudoedit /etc/salt/minion ```. Tiedostoon lisäsin rivin "master: 192.168.56.5" eli "mastr" koneen ip osoitteen, sitten lisäsin "id: sale". Tallensin tiedoston ja poistuin siitä.
+Muutoksien jälkeen käynnistin minion koneen uudelleen komennolla 
+```
+sudo systemctl restart salt-minion.service
+```
+Sitten poistuin minion koneesta ```exit``` ja otin ssh yhteyden "mastr" koneeseen.
+```
+sudo vagrant ssh mastr
+```
+Katsoin että minion koneesta on tullut orja avain pyyntö, komennolla.
+```
+sudo salt-key 
+```
+![image](https://user-images.githubusercontent.com/93308960/140992818-02a31b8f-6405-4674-a016-89db62762486.png)
+
+Pyyntö oli tullut ja hyväksyin avaimen komennolla 
+```
+sudo salt-key -A
+```
+![image](https://user-images.githubusercontent.com/93308960/140992954-5f37bedc-8696-4991-851b-0460de17cf79.png)
+
+Kysyttiin että haluanko varmasti jatkaa ja vastasin "y".
+
+Hyväksymisen jälkeen testasin parilla komenolla että yhetys toimii orja koneeseen.
+Ensimmäinen komento oli 
+```
+sudo salt '*'grains.item osfinger
+```
+![image](https://user-images.githubusercontent.com/93308960/140993480-dc9eedb0-eab5-4545-b4b5-c6d14a32c265.png)
+
+Kuvasta näkyy että yhteys toimii. Halusin vielä testata yhteyttämällä asentamalla httpie.
+
+```
+sudo salt '*' pkg.install httpie
+```
+![image](https://user-images.githubusercontent.com/93308960/140992643-95c0b3bd-7dff-48f6-8bc1-5d8de59d7df5.png)
+
+Kuvasta näkyy yhteys toimii ja asennus asentui.
 
 ## e) As code
+
+Ensiksi tein hekmiston "/srv/salt/testikakka" komennolla 
+```
+sudo mkdir -p /srv/salt/testikakka
+```
+Tämän jälkeen menin kyseiseen hakemistoon komennolla ``` cd ```, sitten loin tiedoston init.sls komennolla 
+```
+sudo nano init.sls
+```
+Sinne kirjoitin alla olevan infra koodi ptäkän
+```
+  pkg.installed:
+    - name: tree
+  user.present:
+    - name: mannytesti
+  group.present:
+    - name: modernfam
+    - adduser:
+      - mannytesti
+```
+Tallensin tiedoston ja poistun. 
+
+Sen jälkeen ajoin komennon 
+```
+sudo salt '*' state.apply testikakka
+```
+Alla olevasta kuvasta näkyy että muutokset onnistui. 
+![image](https://user-images.githubusercontent.com/93308960/141003169-494d59c9-5e5a-49d7-85bc-23fbd045773f.png)
+
+Poituin masteri koneesta ja kirjauduin ssh yhteydellä orja koneeseen, tarkistamaan että muutokset tulivat käyttöön.
+Kuvassa näkyy että haluttu käyttäjä "mannytesti" on luotu, näkyy myös että haluttu tree sovellus on asennettu.
+![image](https://user-images.githubusercontent.com/93308960/141003290-13deb93b-ae5b-4a06-bfef-e3b071bf3233.png)
+
+
+
+
+
