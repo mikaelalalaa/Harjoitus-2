@@ -7,11 +7,11 @@ Tehtävät löytyvät [Tero Karvisen sivulta](https://terokarvinen.com/2021/conf
 
 [Salt Quickstart](https://terokarvinen.com/2018/salt-quickstart-salt-stack-master-and-slave-on-ubuntu-linux/)
  
- Sivulla opastetaan miten voi asentaa Master ja slaven koneelle.
- * Kuten jos on palomuuri käytössä niin, mitä portteja master käyttää.
- * Miten voi hyväksyä slave avaimen masterilla
  
- Kerrotaan myös pari komentoa joita voi kokeilla testatakseen oliko asennus onnistunut.
+ * opetus Master ja slaven asennuksen koneelle.
+ * palomuuri käyttö masterin kanssa, mitä porttia master käyttää.
+ * slave avaimen hyväksyminen masterilla
+ * komentoa joita voi kokeilla testatakseen oliko asennus onnistunut.
  
  ```
  master$ sudo salt '*' grains.items|less
@@ -24,12 +24,11 @@ Tehtävät löytyvät [Tero Karvisen sivulta](https://terokarvinen.com/2021/conf
 
 [Vagrant Revisited](https://terokarvinen.com/2017/04/11/vagrant-revisited-install-boot-new-virtual-machine-in-31-seconds/)
 
-Sivulla kerrotaan miten voi asentaa Vagrantin avulla uuden virtuaali koneen.
-Kerrotaan myös millä luotua konetta voi hallita
+* Vagrantin avulla asentaminen uuden virtuaali koneen.
+* miten luotuun koneeseen voi otta yhteyttä 
+*   
 
-sisältää mm.
-* Komentoja
-* SSH
+
 
 
 [Two Machine Virtual Network With Debian 11 Bullseye and Vagrant](https://terokarvinen.com/2021/two-machine-virtual-network-with-debian-11-bullseye-and-vagrant/)
@@ -107,6 +106,12 @@ sudo vagrant ssh
 ![image](https://user-images.githubusercontent.com/93308960/140977749-661d8c22-c786-4165-bf6e-b59aaaaddfd1.png)
  
  joka onnistui.
+ 
+ Koska kaikki onnistui niin loppujen lopuksi poistin koneen komennolla 
+ 
+ ```
+ sudo vagrant destroy
+ ```
 
 ## c) Mun verkko
 
