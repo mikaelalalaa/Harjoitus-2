@@ -1,6 +1,6 @@
 # Harjoitus-2
 
-
+Tässä harjoituksessa tutustutaa salt minion ja master toimintaa, vagrantin avulla virtuaali konee asennuksia. Tiivistelmiä artikkeleista.
 Tehtävät löytyvät [Tero Karvisen sivulta](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-2021-autumn/#h2-master-slave)
 
 ## z) Tiivistelmät
