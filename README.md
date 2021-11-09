@@ -55,8 +55,29 @@ sisältää mm.
 
 ## a) Two-face
 
-
-
+Olin aijemmin jo asentanut salt minionin ja masterin komennoilla.
+```
+sudo apt-get -y install salt-minion
+sudo apt-get -y install salt-minion
+```
+Katsoin ip-osoitteeni komennolla ja otin osoitteen muistiin.
+```
+sudo hostname -I
+```
+Sitten ajoin komennon 
+```
+sudoedit /etc/salt/minion
+```
+Lisäsin rivin master: (ip osoite) ja tallensin tiedoston.
+Tämän jälkeen hyväksyin slave avaimen.
+```
+sudo salt-key -A
+```
+Lopuksi testasin että saan orjalta yhteyden, komennoilla.
+```
+sudo salt '*' grains.item
+sudo salt '*' cmd.run 'whoami'
+```
 
 
 ## b) Hello Vagrant
