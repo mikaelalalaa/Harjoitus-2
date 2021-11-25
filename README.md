@@ -55,7 +55,7 @@ Tehtävät löytyvät [Tero Karvisen sivulta](https://terokarvinen.com/2021/conf
 Olin aijemmin jo asentanut salt minionin ja masterin komennoilla.
 ```
 sudo apt-get -y install salt-minion
-sudo apt-get -y install salt-minion
+sudo apt-get -y install salt-master
 ```
 Katsoin ip-osoitteeni komennolla ja otin osoitteen muistiin.
 ```
